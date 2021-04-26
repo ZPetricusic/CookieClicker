@@ -1,13 +1,37 @@
-// on page load
-document.onreadystatechange = () => {
-    for (let i = 0; i < localStorage.length; i++) {
-        // call 3 times for top 3 list items
-        updateHighScores();
-        if (i == 3) break;
-    }
+// ask for the username as long as
+// an empty string is being passed
+let getUsername = (currentScore) => {
+    let username;
+    do {
+        // get the username via a prompt
+        username = prompt("Your score is " + currentScore + ".\n"
+            + "Please type in your username");
+
+        // if the "cancel" button was pressed break from the loop
+        if (username === null) break;
+
+        // remove any possible leading/trailing whitespaces
+        username = username.trim();
+
+    } while (username.length == 0);
+
+    return username;
 }
 
+
+// check if the username is unique to the LS
+let isUniqueUsername = (username) => {
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i) == username)
+            return false;
+    }
+    return true;
+}
+
+
+
 let updateHighScores = () => {
+
     let allScores = [];
 
     // fill the temporary array with the scores from localStorage
@@ -57,6 +81,14 @@ let updateHighScores = () => {
     }
 }
 
+
+// add a K-V pair to the localstorage
+let add = (username, currentScore) => {
+    localStorage.setItem(username, currentScore);
+    updateHighScores();
+};
+
+
 let startButton = document.getElementById("startButton");
 
 // start the game on button click
@@ -77,7 +109,6 @@ startButton.addEventListener('click', () => {
     // defining a function in order to remove the listener
     // after the game is finished
     let updateScore = () => {
-
         currentScore++;
 
         // update the text in the element
@@ -100,8 +131,12 @@ startButton.addEventListener('click', () => {
     // when the time runs out
     const countDown = setInterval(() => {
 
+        let gameCompleted = false;
+
         // if there's no time left
         if (--secondsLeft == 0) {
+
+            gameCompleted = true;
 
             // stop the count
             clearInterval(countDown);
@@ -112,11 +147,6 @@ startButton.addEventListener('click', () => {
             // re-enable the start button
             startButton.disabled = false;
 
-            // reset the time remaining
-            setTimeout(() => {
-                secondsLeftText.textContent = startingCounter;
-            }, 100);
-
             // remove the clicking listener
             cookie.removeEventListener('click', updateScore);
 
@@ -126,27 +156,37 @@ startButton.addEventListener('click', () => {
             // reset the score
             scoreElement.textContent = 0;
 
-            // get the username via a prompt
-            let username = prompt("Your score is " + currentScore + ".\n"
-                + "Please type in your username");
+            // get the username
+            let username = getUsername(currentScore);
 
-            // add a K-V pair to the localstorage
-            let add = () => {
-                localStorage.setItem(username, currentScore);
-            };
+            // as long as the user is submitting existing names
+            while (!isUniqueUsername(username) && username !== null) {
+                alert("The username you submitted is already taken!\n"
+                    + "Please select a different username or cancel the process.");
 
-            // but only if the username exists
-            // (prompt was not submitted as empty)
-            if (username.length > 0) {
-                add();
-                updateHighScores();
-            } else alert("Your result will not be saved since no username was provided.");
+                // ask for a new name
+                username = getUsername(currentScore);
+            }
+
+            // if a username was actually submitted add it to the list
+            if (username !== null)
+                add(username, currentScore);
+
         }
 
         // update the text for time-left
-        secondsLeftText.textContent = secondsLeft;
+        secondsLeftText.textContent = (gameCompleted) ? startingCounter : secondsLeft;
 
         // call the function every second (1000ms)
     }, 1000);
 
 });
+
+
+// on page load (ready state change goes through multiple states so it calls the function twice)
+
+// call 3 times for top 3 list items
+window.onload = () => {
+    for (let i = 0; i < localStorage.length || i == 3; i++)
+        updateHighScores();
+}

@@ -4,36 +4,34 @@ body {
 }
 
 .container {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr;
-    align-items: center;
-    justify-items: center;
-    justify-content: center;
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
 }
 
-.grid-container-x2 {
+.flex-container-x2 {
     width: 900px;
     height: 900px;
-    display: grid;
+    display: flex;
+    column-gap: 50px;
+    flex-wrap: wrap;
     justify-content: center;
-    justify-items: center;
     align-items: center;
-    grid-template-columns: 1fr 1fr;
 }
 
 
 .game-wrapper {
-    position: relative;
-    /*compensating for row-gap twice*/
-    bottom: 40px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    /* teoretski ne treba ovo dvoje */
     justify-content: center;
     align-items: center;
     row-gap: 20px;
@@ -99,12 +97,6 @@ body {
 
 .game>img[data-clickable="true"]:active {
     width: 60%;
-}
-
-.hs-wrapper {
-    display: grid;
-    justify-content: center;
-    grid-template-rows: 1fr 1fr;
 }
 
 .hs {
