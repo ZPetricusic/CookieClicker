@@ -15,6 +15,40 @@ let getUsername = (currentScore) => {
 
     } while (username.length == 0);
 
+    let tempUsername = "";
+
+    // if a username was submitted
+    if (username !== null) {
+
+        // clean it of possible spaces by converting them to camelCase
+        for (let i = 0; i < username.length; i++) {
+
+            // if the current char is a space
+            if (username.charAt(i) === ' ') {
+
+                // check if the following char is not a space
+                // and that you're not checking an out of bounds index
+                if (username.charAt(i + 1) !== ' ' && i + 1 !== username.length) {
+
+                    // if it's not, add it to the tempUsername
+                    let tmpLetter = username.charAt(i + 1).toUpperCase();
+                    tempUsername += tmpLetter;
+
+                    // skip the next character because it's already added
+                    i++;
+                }
+
+            } else {
+
+                // if it's not, just add it to the tempUsername
+                tempUsername += username.charAt(i);
+            }
+        }
+    }
+
+    // return the modified username
+    username = tempUsername;
+
     return username;
 }
 
@@ -22,6 +56,8 @@ let getUsername = (currentScore) => {
 // check if the username is unique to the LS
 let isUniqueUsername = (username) => {
     for (let i = 0; i < localStorage.length; i++) {
+
+        // if there's already an entry with the same key in LS
         if (localStorage.key(i) == username)
             return false;
     }
@@ -76,8 +112,10 @@ let updateHighScores = () => {
         // children[0] = username
         highscoreList[i].children[0].textContent = listOfNames[i];
 
-        // children[1] = score
-        highscoreList[i].children[1].textContent = allScores[i];
+        // children[3] = score
+        highscoreList[i].children[3].textContent = allScores[i];
+
+        // children[1] = <br>, children[2] = <i>
     }
 }
 
@@ -158,6 +196,14 @@ startButton.addEventListener('click', () => {
 
             // get the username
             let username = getUsername(currentScore);
+
+            // disallow using a username over 20 characters in length
+            while (username.length > 15 && username !== null) {
+                alert("Your username must be between 1 and 15 characters long.");
+
+                // ask for a new name
+                username = getUsername(currentScore);
+            }
 
             // as long as the user is submitting existing names
             while (!isUniqueUsername(username) && username !== null) {
