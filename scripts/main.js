@@ -15,10 +15,10 @@ let getUsername = (currentScore) => {
 
     } while (username.length == 0);
 
-    let tempUsername = "";
 
     // if a username was submitted
     if (username !== null) {
+        let tempUsername = "";
 
         // clean it of possible spaces by converting them to camelCase
         for (let i = 0; i < username.length; i++) {
@@ -44,10 +44,9 @@ let getUsername = (currentScore) => {
                 tempUsername += username.charAt(i);
             }
         }
+        // return the modified username
+        username = tempUsername;
     }
-
-    // return the modified username
-    username = tempUsername;
 
     return username;
 }
@@ -197,7 +196,7 @@ startButton.addEventListener('click', () => {
             // get the username
             let username = getUsername(currentScore);
 
-            // disallow using a username over 20 characters in length
+            // disallow using a username over 15 characters in length
             while (username.length > 15 && username !== null) {
                 alert("Your username must be between 1 and 15 characters long.");
 

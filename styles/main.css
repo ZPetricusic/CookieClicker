@@ -1,5 +1,13 @@
+html {
+    height: 100%;
+}
+
 body {
-    background-color: rgb(25, 86, 165);
+    background-image: linear-gradient(to top, rgb(25, 86, 165), rgb(88, 156, 245));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+    margin: 0;
     overflow-x: hidden;
 }
 
@@ -319,9 +327,10 @@ li {
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1200px) {
     .container-x2 {
-        margin-top: 0;
+        margin-top: 2em;
+        margin-bottom: 2em;
         width: 980px;
         height: 100%;
         display: flex;
