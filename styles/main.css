@@ -277,76 +277,6 @@ li {
 
 
     .timer {
-        width: 200px;
-        font-size: x-large;
-    }
-
-    .start {
-        width: 200px;
-        font-size: 1.35em;
-    }
-
-    .game {
-        width: 400px;
-        height: 500px;
-    }
-
-    #score {
-        font-size: 2em;
-    }
-
-    .game>img {
-        width: 70%;
-    }
-
-    .game>img[data-clickable="false"]:active {
-        width: 70%;
-    }
-
-    .game>img[data-clickable="true"]:active {
-        width: 65%;
-    }
-
-    .hs {
-        height: 250px;
-        width: 250px;
-    }
-
-    .hs-title {
-        font-size: 1.5em;
-    }
-
-    ul {
-        font-size: 1.25em;
-    }
-
-    li {
-        padding: 10px;
-    }
-
-}
-
-/* Large devices (laptops and normal desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-
-    .container-x2 {
-        margin-top: 0;
-        width: 750px;
-        height: 100%;
-        display: flex;
-        column-gap: 50px;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
-
-
-    .game-wrapper {
-        row-gap: 20px;
-    }
-
-
-    .timer {
         width: 150px;
         font-size: large;
     }
@@ -394,10 +324,83 @@ li {
         padding: 10px;
     }
 
+
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 1200px) {
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 1500px) {
+
+    .container-x2 {
+        margin-top: 0;
+        width: 750px;
+        height: 100%;
+        display: flex;
+        column-gap: 50px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .game-wrapper {
+        row-gap: 20px;
+    }
+
+
+    .timer {
+        width: 150px;
+        font-size: large;
+    }
+
+    .start {
+        width: 150px;
+        font-size: 1.2em;
+    }
+
+    .game {
+        width: 400px;
+        height: 500px;
+    }
+
+    #score {
+        font-size: 2em;
+    }
+
+    .game>img {
+        width: 70%;
+    }
+
+    .game>img[data-clickable="false"]:active {
+        width: 70%;
+    }
+
+    .game>img[data-clickable="true"]:active {
+        width: 65%;
+    }
+
+    .hs {
+        height: 250px;
+        width: 250px;
+    }
+
+    .hs-title {
+        font-size: 1.5em;
+    }
+
+    ul {
+        font-size: 1.25em;
+    }
+
+    li {
+        padding: 10px;
+    }
+
+
+}
+
+
+/* Larger devices (laptops/desktops, 1200px and up) */
+@media only screen and (min-width: 2500px) {
     .container-x2 {
         margin-top: 2em;
         margin-bottom: 2em;
