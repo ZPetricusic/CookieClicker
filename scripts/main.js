@@ -197,7 +197,7 @@ startButton.addEventListener('click', () => {
             let username = getUsername(currentScore);
 
             // disallow using a username over 15 characters in length
-            while (username.length > 15 && username !== null) {
+            while (username !== null && username.length > 15) {
                 alert("Your username must be between 1 and 15 characters long.");
 
                 // ask for a new name
